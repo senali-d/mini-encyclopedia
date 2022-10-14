@@ -19,7 +19,7 @@ const Home: NextPage = () => {
               Welcome to <br/> Mini Encyclopedia!
             </h1>
             <h2 className="text-md mb-5 uppercase font-medium text-white px-3">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500.
+              Mini Encyclopedia is a web site that provides knowledge of sea animals.
             </h2>
             <GradientButton title="Explore" link="/" />
           </div>
