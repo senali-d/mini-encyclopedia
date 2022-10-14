@@ -1,20 +1,32 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AiFillGithub } from "react-icons/ai"
 import { GiHamburgerMenu } from "react-icons/gi"
 
 const Navbar = () => {
   const [show, setShow] = useState<boolean>(false)
+  const [isTop, setIsTop] = useState<boolean>(false)
 
   const handleClick = () => {
     setShow(!show)
   }
 
+  const changeNavBg = () => {
+    window.scrollY >= 10 ? setIsTop(true) : setIsTop(false)
+   }
+ 
+   useEffect(() => {
+     window.addEventListener('scroll', changeNavBg);
+     return () => {
+       window.removeEventListener('scroll', changeNavBg);
+     }
+   }, [])
+
   return (
-    <nav className="px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0">
+    <nav className={`px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 ${isTop ? 'bg-white' : 'transparent'}`}>
       <div className="container flex flex-wrap justify-between items-center mx-auto">
       <a href="/" className="flex items-center">
-          <img src="/me-logo.png" className="mr-3 h-6 sm:h-9" alt="Mini Encyclopedia Logo" />
-          <span className="self-center text-[14px] uppercase font-semibold whitespace-nowrap text-white">Mini Encyclopedia</span>
+        <img src="/me-logo.png" className="mr-3 h-6 sm:h-9" alt="Mini Encyclopedia Logo" />
+        <span className={`self-center text-[14px] uppercase font-semibold whitespace-nowrap ${isTop ? 'text-black' : 'text-white' }`}>Mini Encyclopedia</span>
       </a>
       <div className="flex md:order-2">
           <a target="_blank" href="https://github.com/senali-d/mini-encyclopedia">
