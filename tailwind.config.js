@@ -5,6 +5,9 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      'lg': '1200px',
+    },
     extend: {
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif'],
