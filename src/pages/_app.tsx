@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import { NhostNextProvider, NhostClient } from '@nhost/nextjs'
+import { NhostNextProvider, NhostClient, NhostSession } from '@nhost/nextjs'
 import { useRouter } from 'next/router'
 
 import Navbar from '../components/layout/navbar'
@@ -11,7 +11,11 @@ const nhost = new NhostClient({
   region: process.env.NEXT_PUBLIC_NHOST_REGION || ''
 })
 
-function MyApp({ Component, pageProps }: AppProps) {
+interface CustomAppProps {
+  nhostSession: NhostSession
+}
+
+function MyApp({ Component, pageProps }: AppProps<CustomAppProps>) {
   const router = useRouter();
   const { pathname } = router
   
