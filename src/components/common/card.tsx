@@ -1,10 +1,10 @@
-interface CardHorizontal {
+interface CardHorizontalProps {
   image: string;
   title: string;
   description: string;
 }
 
-const CardHorizontal = ({ image, title, description }: CardHorizontal) => {
+const CardHorizontal = ({ image, title, description }: CardHorizontalProps) => {
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg mb-10">
       <img className="w-full" src={image} alt={title} />
@@ -18,4 +18,24 @@ const CardHorizontal = ({ image, title, description }: CardHorizontal) => {
   )
 }
 
-export { CardHorizontal }
+interface CardVerticalProps {
+  image: string;
+  description: string;
+  index: number;
+}
+
+const CardVertical = ({ image, description, index }: CardVerticalProps) => {
+  return (
+    <div className="flex flex-row w-full">
+      <div className={`w-1/3 order-${index%2 === 0 ? '2' : '1'}`}>
+        <img src={image} alt="image" />
+      </div>
+      <div className={`w-2/3 order-${index%2 === 0 ? '1' : '2'} flex items-center`}>
+        <p className="px-5 text-white">{description}</p>
+      </div>
+    </div>
+  )
+}
+
+export { CardHorizontal, CardVertical };
+
