@@ -22,7 +22,7 @@ const Navbar = () => {
    }, [])
 
   return (
-    <nav className={`px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 ${isTop ? 'bg-[#6d85a7]' : 'transparent'}`}>
+    <nav className={`px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 shadow-2xl ${isTop ? 'bg-[#6d85a7]' : 'transparent'}`}>
       <div className="container flex flex-wrap justify-between items-center mx-auto">
       <a href="/" className="flex items-center">
         <img src="/me-logo.png" className="mr-3 h-6 sm:h-9" alt="Mini Encyclopedia Logo" />
