@@ -21,7 +21,7 @@ const SignIn = () => {
   }
 
   if (isSuccess) {
-    router.push('/dashboard')
+    router.push('/admin')
     return null
   }
 
