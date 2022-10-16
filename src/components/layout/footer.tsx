@@ -2,7 +2,7 @@ import { FaTwitter, FaGithub } from 'react-icons/fa'
 const Footer = () => {
   return (
     <footer className="p-4 bg-[#45576f] sm:p-6">
-      <div className="sm:flex sm:items-center sm:justify-between">
+      <div className="max-w-[1200px] mx-auto sm:flex sm:items-center sm:justify-between">
         <span className="text-sm text-white sm:text-center">
           {`© ${new Date().getFullYear()} `}
           <a href="/" className="hover:underline">

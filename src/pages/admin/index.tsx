@@ -1,18 +1,16 @@
-import { NextPage } from "next"
+import { NextPage } from 'next'
 
-import withAuth from "../../../withAuth"
+import withAuth from '../../../withAuth'
+import Header from '../../components/common/header'
+import AdminLayout from '../../components/layout/admin-layout'
 
 const Dashboard: NextPage = () => {
   return (
-    <div className="flex justify-center">
-      <div className="min-h-[calc(100vh-78px)] pt-[72px] w-full">
-        <div className="min-h-[calc(100vh-72px)] pt-[72px] w-full absolute bg-[#6d86a8] opacity-70">
-          <h1 className="text-4xl md:text-5xl mb-5 leading-12 uppercase font-medium text-white px-2">
-            Dashboard
-          </h1>
-        </div>
+    <AdminLayout>
+      <div className="flex justify-center w-full pt-4 max-w-[1200px] mx-auto">
+        <Header title="Dashboard" />
       </div>
-    </div>
+    </AdminLayout>
   )
 }
 

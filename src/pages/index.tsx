@@ -21,7 +21,7 @@ const Home: NextPage = () => {
             <h2 className="text-md mb-5 uppercase font-medium text-white px-3">
               Mini Encyclopedia is a web site that provides knowledge of sea animals.
             </h2>
-            <GradientButton title="Explore" link="/" />
+            <GradientButton title="Explore" link="/sea-animals" />
           </div>
         </div>
       </div>

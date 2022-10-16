@@ -26,11 +26,11 @@ interface CardVerticalProps {
 
 const CardVertical = ({ image, description, index }: CardVerticalProps) => {
   return (
-    <div className="flex flex-col sm:flex-row w-full mb-5">
-      <div className={`w-full sm:w-1/3 flex sm:order-${index%2 === 0 ? '2' : '1'}`}>
+    <div className="flex flex-col sm:flex-row w-full">
+      <div className={`w-full sm:w-1/3 flex ${index%2 === 0 ? 'sm:order-2' : 'sm:order-1'}`}>
         <img src={image} alt="image" className="w-[100%] sm:auto max-w-[300px] mx-auto" />
       </div>
-      <div className={`w-full sm:w-2/3 flex sm:order-${index%2 === 0 ? '1' : '2'} items-center`}>
+      <div className={`w-full sm:w-2/3 flex ${index%2 === 0 ? 'sm:order-1' : 'sm:order-2'} items-center`}>
         <p className="px-5 text-white text-center sm:text-left">{description}</p>
       </div>
     </div>
