@@ -5,7 +5,7 @@ import Layout from '../components/layout/layout'
 const SeaAnimals = () => {
   return (
     <Layout>
-      <div className="flex justify-center items-center w-full bg-[url('/img/sea-banner.jpg')] bg-cover bg-fixed">
+      <div className="flex pt-[72px] justify-center items-center w-full bg-[url('/img/sea-banner.jpg')] bg-cover bg-fixed">
         <div className="mx-2 max-w-[1200px]">
           <div className="min-h-[calc(100vh-150px)] pt-4">
             <Header title="Sea Animals" />

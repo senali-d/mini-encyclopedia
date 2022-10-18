@@ -28,7 +28,7 @@ const SignIn = () => {
   const disableForm = isLoading || needsEmailVerification
 
   return (
-    <div className="w-full mx-auto max-w-lg min-h-[calc(100vh-126px)] pt-[72px] flex items-center">
+    <div className="w-full mx-auto max-w-lg min-h-[100vh] flex items-center">
       <div className="w-full flex flex-col items-center px-4 py-5 sm:px-8 sm:bg-white sm:rounded-md sm:shadow">
         {needsEmailVerification ? (
           <p className="text-center text-gray-500">

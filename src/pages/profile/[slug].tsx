@@ -5,7 +5,7 @@ import Layout from '../../components/layout/layout'
 const Profile = () => {
   return (
     <Layout>
-      <div className="flex items-center justify-center bg-[url('/img/sea-banner.jpg')] bg-cover bg-fixed">
+      <div className="flex pt-[72px] items-center justify-center bg-[url('/img/sea-banner.jpg')] bg-cover bg-fixed">
         <div className="mx-2 max-w-[1200px] w-full">
           <div className="min-h-[calc(100vh-150px)] pt-4 pb-10 space-y-5 w-full">
             <Header title="Facts about Seahorse" />

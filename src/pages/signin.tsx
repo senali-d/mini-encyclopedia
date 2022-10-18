@@ -8,7 +8,7 @@ const SignInPage = () => {
         <title>Sign in</title>
       </Head>
 
-      <div className="flex items-center justify-center py-6 bg-[#6d85a7]">
+      <div className="flex items-center justify-center bg-[#6d85a7]">
         <SignIn />
       </div>
     </>
