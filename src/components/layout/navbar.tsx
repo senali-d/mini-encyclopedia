@@ -99,8 +99,8 @@ const Navbar = ({ isAdmin }: NavbarProps) => {
         >
           <ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent">
             {isAdmin ? (
-              adminMenuItems.map((item) => (
-                <li>
+              adminMenuItems.map((item, index) => (
+                <li key={index}>
                   {item.href ? (
                     <Link href={item.href}>
                       <a className="block py-2 pr-4 pl-3 md:text-white rounded md:bg-transparent md:p-0">
@@ -117,8 +117,8 @@ const Navbar = ({ isAdmin }: NavbarProps) => {
                 </li>
               ))
             ) : (
-              mainMenuItems.map(item => (
-                <li>
+              mainMenuItems.map((item, index) => (
+                <li key={index}>
                   <Link href={item.href}>
                       <a className="block py-2 pr-4 pl-3 md:text-white rounded md:bg-transparent md:p-0">
                         <span>{item.label}</span>
