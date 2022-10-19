@@ -1,8 +1,9 @@
 import type { AppProps } from 'next/app'
 import { NhostNextProvider, NhostClient, NhostSession } from '@nhost/nextjs'
+import { NhostApolloProvider } from '@nhost/react-apollo'
 
-import '../styles/globals.css'
 import { UserProvider } from '../../UserProvider'
+import '../styles/globals.css'
 
 const nhost = new NhostClient({
   subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN || '',
@@ -17,9 +18,11 @@ function MyApp({ Component, pageProps }: AppProps<CustomAppProps>) {
   
   return (
     <NhostNextProvider nhost={nhost} initial={pageProps.nhostSession}>
-      <UserProvider>
-        <Component {...pageProps} />
-      </UserProvider>
+      <NhostApolloProvider nhost={nhost}>
+        <UserProvider>
+          <Component {...pageProps} />
+        </UserProvider>
+      </NhostApolloProvider>
     </NhostNextProvider>
   )
 }

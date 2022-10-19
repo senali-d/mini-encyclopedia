@@ -6,9 +6,9 @@ interface CardHorizontalProps {
 
 const CardHorizontal = ({ image, title, description }: CardHorizontalProps) => {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg mb-10">
+    <div className="max-w-sm mx-1 rounded overflow-hidden shadow-lg mb-10 bg-white">
       <img className="w-full" src={image} alt={title} />
-      <div className="px-6 py-4 bg-white">
+      <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{title}</div>
         <p className="text-gray-700 text-base">
           {description}
