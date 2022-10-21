@@ -12,3 +12,24 @@ body {
 h1 {
   font-family: 'Poppins', sans-serif;
 }
+
+.profile-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.profile-input::before {
+  background-image: url('/img/edit.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  content: '';
+  height: 40px;
+  width: 40px;
+}
+
+@media only screen and (max-width: 640px) {
+  .profile-input::before {
+    background-size: 15px;
+    height: 30px;
+    width: 30px;
+  }
+}
