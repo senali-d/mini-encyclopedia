@@ -1,14 +1,10 @@
 import type { AppProps } from 'next/app'
-import { NhostNextProvider, NhostClient, NhostSession } from '@nhost/nextjs'
+import { NhostNextProvider, NhostSession } from '@nhost/nextjs'
 import { NhostApolloProvider } from '@nhost/react-apollo'
 
+import nhost from '../nhost'
 import { UserProvider } from '../../UserProvider'
 import '../styles/globals.css'
-
-const nhost = new NhostClient({
-  subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN || '',
-  region: process.env.NEXT_PUBLIC_NHOST_REGION || ''
-})
 
 interface CustomAppProps {
   nhostSession: NhostSession
