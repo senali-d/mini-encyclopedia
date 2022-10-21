@@ -87,6 +87,7 @@ const Navbar = ({ isAdmin }: NavbarProps) => {
         <div className="flex md:order-2">
           <a
             target="_blank"
+            rel="noreferrer"
             href="https://github.com/senali-d/mini-encyclopedia"
           >
             <button
