@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { useUserData } from '@nhost/nextjs'
 
-const UserContext = React.createContext(null)
+const UserContext = React.createContext<any | null>(null)
 
-export function UserProvider({ children = null }: any) {
-  const user = useUserData()
+export function UserProvider({ children }: any) {
+  const user: any = useUserData()
   return (
     <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
   )
