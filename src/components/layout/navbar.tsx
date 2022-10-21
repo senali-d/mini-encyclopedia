@@ -26,6 +26,10 @@ const Navbar = ({ isAdmin }: NavbarProps) => {
       label: "Sea Animals",
       href: "/sea-animals",
     },
+    {
+      label: "Sign In",
+      href: "/signin",
+    },
   ]
 
   const adminMenuItems = [
