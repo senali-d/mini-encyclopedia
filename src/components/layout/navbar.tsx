@@ -19,6 +19,10 @@ const Navbar = ({ isAdmin }: NavbarProps) => {
 
   const mainMenuItems = [
     {
+      label: "About",
+      href: "/about",
+    },
+    {
       label: "Sea Animals",
       href: "/sea-animals",
     },
@@ -27,7 +31,7 @@ const Navbar = ({ isAdmin }: NavbarProps) => {
   const adminMenuItems = [
     {
       label: "Dashboard",
-      href: "/",
+      href: "/admin",
     },
     {
       label: "Profile",
@@ -61,16 +65,18 @@ const Navbar = ({ isAdmin }: NavbarProps) => {
       }`}
     >
       <div className="max-w-[1200px] flex flex-wrap items-center mx-auto">
-        <a href="/" className="flex items-center flex-1">
-          <img
-            src="/me-logo.png"
-            className="mr-3 h-6 sm:h-9"
-            alt="Mini Encyclopedia Logo"
-          />
-          <span className="self-center text-[14px] uppercase font-semibold whitespace-nowrap text-white">
-            Mini Encyclopedia
-          </span>
-        </a>
+        <Link href="/">
+          <a className="flex items-center flex-1">
+            <img
+              src="/me-logo.png"
+              className="mr-3 h-6 sm:h-9"
+              alt="Mini Encyclopedia Logo"
+            />
+            <span className="self-center text-[14px] uppercase font-semibold whitespace-nowrap text-white">
+              Mini Encyclopedia
+            </span>
+          </a>
+        </Link>
         <div className="flex md:order-2">
           <a
             target="_blank"

@@ -10,3 +10,18 @@ export const GET_PROFILE = gql`
     }
   }
 `
+
+export const GET_PROFILE_WITH_FACTS = gql`
+  query ProfileByPk($id: uuid!) {
+    profile_by_pk(id: $id) {
+      id
+      title
+      description
+      image
+      facts {
+        id
+        fact
+      }
+    }
+  }
+`

@@ -32,6 +32,7 @@ const SeaAnimals = () => {
                 {profile.map((p: {id: string, title: string; description: string, image: string}) => (
                   <CardHorizontal
                     key={p.id}
+                    id={p.id}
                     image={p.image}
                     title={p.title}
                     description={p.description}
