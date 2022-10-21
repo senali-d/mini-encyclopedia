@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react'
+import Image from 'next/image'
 import { NextPage } from 'next'
 import { useUserData } from '@nhost/react'
 import { useMutation } from '@apollo/client'
@@ -62,15 +63,17 @@ const Profile: NextPage = () => {
       <div className="flex justify-center flex-col w-full pt-4 max-w-[1200px] mx-auto">
         <Header title="Sea Horse" />
         <div>
-          <div className="w-1/2">
+          <div className="w-full md:w-1/2">
             <Input
               type="file"
               name="image"
-              className="profile-input mx-auto mr-0 relative top-[25px] mt-[-20px] h-[30px] sm:h-[40px] w-[30px] sm:w-[40px] rounded-full flex bg-[#45576f] hover:cursor-pointer"
+              className="profile-input mx-auto mr-0 relative top-[25px] mt-[-20px] h-[30px] sm:h-[40px] w-[30px] sm:w-[40px] rounded-full flex bg-[#45576f] hover:cursor-pointer z-10"
               accept="image/*"
               onChange={handleUpload}
             />
-            <img
+            <Image
+              width="600px"
+              height="230px"
               src={
                 data.image === ''
                   ? "/img/placeholder-image.png"

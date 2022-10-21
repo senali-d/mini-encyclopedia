@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { FaTwitter, FaGithub } from 'react-icons/fa'
 const Footer = () => {
   return (
@@ -5,9 +6,11 @@ const Footer = () => {
       <div className="max-w-[1200px] mx-auto sm:flex sm:items-center sm:justify-between">
         <span className="text-sm text-white sm:text-center">
           {`© ${new Date().getFullYear()} `}
-          <a href="/" className="hover:underline">
-            Mini Encyclopedia™
-          </a>
+          <Link  href="/">
+            <a className="hover:underline">
+              Mini Encyclopedia™
+            </a>
+          </Link>
           . All Rights Reserved.
           Design & Developed by @Senali
         </span>
@@ -15,6 +18,7 @@ const Footer = () => {
           <a
             href="https://twitter.com/senali_d"
             target="_blank"
+            rel="noreferrer"
             className="text-white hover:text-gray-300"
           >
             <FaTwitter size={30} />
@@ -23,6 +27,7 @@ const Footer = () => {
           <a
             href="https://github.com/senali-d"
             target="_blank"
+            rel="noreferrer"
             className="text-white hover:text-gray-300"
           >
             <FaGithub size={30} />

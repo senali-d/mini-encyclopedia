@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 import { useSignOut } from '@nhost/nextjs'
 import { AiFillGithub } from 'react-icons/ai'
 import { GiHamburgerMenu } from 'react-icons/gi'
-import Link from 'next/link'
 
 import { useUserContext } from '../../../UserProvider'
 
@@ -71,9 +72,11 @@ const Navbar = ({ isAdmin }: NavbarProps) => {
       <div className="max-w-[1200px] flex flex-wrap items-center mx-auto">
         <Link href="/">
           <a className="flex items-center flex-1">
-            <img
+            <Image
               src="/me-logo.png"
               className="mr-3 h-6 sm:h-9"
+              width="77px"
+              height="36px"
               alt="Mini Encyclopedia Logo"
             />
             <span className="self-center text-[14px] uppercase font-semibold whitespace-nowrap text-white">
