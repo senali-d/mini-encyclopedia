@@ -34,6 +34,7 @@ const Profile = () => {
             ) : profile !== null ? (
               <>
                 <Header title={`Facts about ${profile.title}`} />
+                <div className="text-white text-xl font-medium">{profile.description}</div>
                 <div className="flex flex-wrap justify-center lg:justify-between">
                   {profile.facts.map((fact: {id: string, fact: string;}, index: number) => (
                     <CardVertical 

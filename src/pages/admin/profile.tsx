@@ -67,6 +67,7 @@ const AddProfileForm = ({onChange}: any) => {
   const handleClick = () => {
     if (!user) return
     setKey(Math.random())
+    setData(initialStateProfile)
     return createProfile({
       variables: {
         object: data
@@ -115,12 +116,14 @@ const AddProfileForm = ({onChange}: any) => {
         required
         onChange={handleChange}
         placeholder="@Title"
+        value={data.title}
       />
       <Textarea
         name="description"
         rows={4}
         placeholder="@your description"
         onChange={handleChange}
+        value={data.description}
       />
       <div className="flex flex-col">
         <p className="text-white font-bold text-xl pt-5">Facts:</p>

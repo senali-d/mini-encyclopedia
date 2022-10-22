@@ -20,9 +20,9 @@ const CardHorizontal = ({ id, image, title, description }: CardHorizontalProps) 
             width="400px"
             height="200px"
           />
-          <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">{title}</div>
-            <p className="text-gray-700 text-base">
+          <div className="px-6 py-4 mb-5">
+            <div className="font-bold text-xl">{title}</div>
+            <p className="text-gray-700 text-base md:max-h-[100px] overflow-y-hidden">
               {description}
             </p>
           </div>

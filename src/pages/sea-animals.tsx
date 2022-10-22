@@ -28,7 +28,7 @@ const SeaAnimals = () => {
                 Something went wrong. Try to refresh the page.
               </p>
             ) : profile.length > 0 ? (
-              <div className="flex flex-wrap justify-center lg:justify-between">
+              <div className="flex flex-wrap justify-center lg:justify-start">
                 {profile.map((p: {id: string, title: string; description: string, image: string}) => (
                   <CardHorizontal
                     key={p.id}
