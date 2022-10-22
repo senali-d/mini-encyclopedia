@@ -8,14 +8,14 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { useUserContext } from '../../../UserProvider'
 
 interface NavbarProps {
-  isAdmin: boolean;
+  isAdmin: boolean
 }
 
 const Navbar = ({ isAdmin }: NavbarProps) => {
   const [show, setShow] = useState<boolean>(false)
   const [isTop, setIsTop] = useState<boolean>(false)
-  
-  const { user }: any = useUserContext();
+
+  const { user }: any = useUserContext()
   const { signOut } = useSignOut()
 
   const mainMenuItems = [
@@ -26,10 +26,6 @@ const Navbar = ({ isAdmin }: NavbarProps) => {
     {
       label: "Sea Animals",
       href: "/sea-animals",
-    },
-    {
-      label: "Sign In",
-      href: "/signin",
     },
   ]
 
@@ -116,34 +112,57 @@ const Navbar = ({ isAdmin }: NavbarProps) => {
           } justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky`}
         >
           <ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent">
-            {isAdmin ? (
-              adminMenuItems.map((item, index) => (
-                <li key={index}>
-                  {item.href ? (
+            {isAdmin
+              ? adminMenuItems.map((item, index) => (
+                  <li key={index}>
+                    {item.href ? (
+                      <Link href={item.href}>
+                        <a className="block py-2 pr-4 pl-3 md:text-white rounded md:bg-transparent md:p-0">
+                          {item.label === "Profile" ? (
+                            <span>{user.displayName}</span>
+                          ) : (
+                            <span>{item.label}</span>
+                          )}
+                        </a>
+                      </Link>
+                    ) : (
+                      <button onClick={item.onClick}>
+                        <span className="block py-2 pr-4 pl-3 md:text-white rounded md:bg-transparent md:p-0">
+                          {item.label}
+                        </span>
+                      </button>
+                    )}
+                  </li>
+                ))
+              : mainMenuItems.map((item, index) => (
+                  <li key={index}>
                     <Link href={item.href}>
-                      <a className="block py-2 pr-4 pl-3 md:text-white rounded md:bg-transparent md:p-0">
-                        {item.label === "Profile" ? <span>{user.displayName}</span> : <span>{item.label}</span> }
-                      </a>
-                    </Link>
-                  ) : (
-                    <button onClick={item.onClick}>
-                      <span className="block py-2 pr-4 pl-3 md:text-white rounded md:bg-transparent md:p-0">
-                        {item.label}
-                      </span>
-                    </button>
-                  )}
-                </li>
-              ))
-            ) : (
-              mainMenuItems.map((item, index) => (
-                <li key={index}>
-                  <Link href={item.href}>
                       <a className="block py-2 pr-4 pl-3 md:text-white rounded md:bg-transparent md:p-0">
                         <span>{item.label}</span>
                       </a>
                     </Link>
+                  </li>
+                ))}
+            {!isAdmin ? (
+              !user ? (
+                <li>
+                  <Link href="/signin">
+                    <a className="block py-2 pr-4 pl-3 md:text-white rounded md:bg-transparent md:p-0">
+                      <span>Sign In</span>
+                    </a>
+                  </Link>
                 </li>
-              ))
+              ) : (
+                <li>
+                  <Link href="/admin/my-profile">
+                    <a className="block py-2 pr-4 pl-3 md:text-white rounded md:bg-transparent md:p-0">
+                      <span>{user.metadata.firstName}</span>
+                    </a>
+                  </Link>
+                </li>
+              )
+            ) : (
+              ""
             )}
           </ul>
         </div>
