@@ -2,7 +2,7 @@
 import { NextPage } from 'next'
 
 import withAuth from '../../../withAuth'
-import { UPDATE_USER_MUTATION } from '../../graphql/mutation'
+// import { UPDATE_USER_MUTATION } from '../../graphql/mutation'
 import Header from '../../components/common/header'
 import AdminLayout from '../../components/layout/admin-layout'
 import Input from '../../components/common/input'
