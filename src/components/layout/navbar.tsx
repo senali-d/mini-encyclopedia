@@ -39,8 +39,12 @@ const Navbar = ({ isAdmin }: NavbarProps) => {
       href: "/admin",
     },
     {
-      label: "Profile",
-      href: "/profile",
+      label: "Sea Animals",
+      href: "/admin/profile",
+    },
+    {
+      label: "My Profile",
+      href: "/admin/my-profile",
     },
     {
       label: "Logout",
