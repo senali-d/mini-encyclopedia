@@ -170,7 +170,8 @@ const ProfileTable = ({refetchData}: any) => {
     {"label": "Title"},
     {"label": "Description"},
     {"label": "Image"},
-    {"label": ""},
+    /* TODO: Actions of the profile table - Update/Delete */
+    // {"label": ""},
   ]
 
   useEffect(() => {
@@ -219,14 +220,16 @@ const ProfileTable = ({refetchData}: any) => {
                 <td className="py-4 px-6">
                   <Image src={getImage(p.image)} width="50" height="50" />
                 </td>
-                <td className="py-4 px-6 text-right">
+                {/* TODO: Edit Profile */}
+                {/* <td className="py-4 px-6 text-right">
                   <a
                     href="#"
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
                     Edit
                   </a>
-                </td>
+                </td> */}
+                {/* TODO: Delete Profile */}
               </tr>
             ))}
           </tbody>

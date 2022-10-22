@@ -9,3 +9,16 @@ export const CREATE_PROFILE = gql`
     }
   }
 `
+
+export const UPDATE_PROFILE = gql`
+  mutation updateProfile($id: uuid!, $profile_set_input: profile_set_input!) {
+    update_profile(where: { id: { _eq: $id } }, _set: $profile_set_input) {
+      returning {
+        id
+        title
+        description
+        image
+      }
+    }
+  }
+`
