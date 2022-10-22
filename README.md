@@ -6,6 +6,8 @@ Mini Encyclopedia is a web site that provides knowledge of sea animals. This pro
 
 Mini Encyclopedia is a web site that provides knowledge of sea animals. It provide small introduction about sea animals along with some facts about them. Other than the informative information provide by the site it has introduce new sea animal data into the site. So any one can publish information about any sea animal other than the already in the site.
 
+![min-encyclopedia](https://user-images.githubusercontent.com/52546856/197352725-9b781107-b56d-461a-bf40-26e554208b93.png)
+
 # Demo
 [Mini Encyclopedia](https://mini-encyclopedia.vercel.app/)
 
