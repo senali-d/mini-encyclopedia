@@ -2,9 +2,13 @@ interface ProfileProps {
   title: string;
   description: string;
   image: string;
-  // facts: {
-  //   fact: string;
-  // }[]
+  facts: {
+    data: FactsProp[];
+  };
 }
 
-export type { ProfileProps }
+interface FactsProp {
+  fact: string;
+}
+
+export type { ProfileProps, FactsProp }

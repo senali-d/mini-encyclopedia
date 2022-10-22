@@ -8,7 +8,7 @@ import nhost from '../../nhost'
 import withAuth from '../../../withAuth'
 import { CREATE_PROFILE } from '../../graphql/mutation'
 import { GET_PROFILE } from '../../graphql/queries'
-import { ProfileProps } from '../../types/types'
+import { FactsProp, ProfileProps } from '../../types/types'
 import Header from '../../components/common/header'
 import Input from '../../components/common/input'
 import Textarea from '../../components/common/textarea'
@@ -20,11 +20,17 @@ const initialStateProfile = {
   title: '',
   description: '',
   image: '',
-  // facts: [
-  //   {
-  //     fact: '',
-  //   }
-  // ]
+  facts: { 
+    data: [
+      {
+        fact: '',
+      }
+    ]
+  }
+}
+
+const initialStateFact = {
+  fact: '',
 }
 
 const AddProfileForm = ({onChange}: any) => {
@@ -32,6 +38,7 @@ const AddProfileForm = ({onChange}: any) => {
   
   const [data, setData] = useState<ProfileProps>(initialStateProfile)
   const [key, setKey] = useState<number>(0)
+  const [fact, setFact] = useState<FactsProp>(initialStateFact)
 
   const [createProfile, { data: profileData, loading, error }] = useMutation(CREATE_PROFILE)
 
@@ -67,6 +74,26 @@ const AddProfileForm = ({onChange}: any) => {
     })
   }
 
+  const handleFactChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setFact({"fact": e.target.value})
+  }
+
+  const attachFact = () => {
+    const clone = [...data.facts.data][0].fact
+    if(clone === '') {
+      let factsClone = [fact]
+      setData((data: ProfileProps) => {
+        return {...data, ["facts"]: {["data"]: factsClone}}
+      })
+    } else {
+      let factsClone = [...data.facts.data, fact]
+      setData((data: ProfileProps) => {
+        return {...data, ["facts"]: {["data"]: factsClone}}
+      })
+    }
+    setFact(initialStateFact)
+  }
+
   return (
     <div className="w-full md:w-1/2">
       <Input
@@ -95,9 +122,33 @@ const AddProfileForm = ({onChange}: any) => {
         placeholder="@your description"
         onChange={handleChange}
       />
+      <div className="flex flex-col">
+        <p className="text-white font-bold text-xl pt-5">Facts:</p>
+        <ul className="mb-5">
+          {data.facts.data.map((f, index) => (
+            f.fact !== '' ? <li key={index} className="text-white font-medium list-inside list-disc">
+              {f.fact}
+            </li>: ''
+          ))}
+        </ul>
+        <Textarea
+          name="fact"
+          rows={3}
+          placeholder="@your fact"
+          onChange={handleFactChange}
+          value={fact.fact}
+        />
+        <button
+          disabled={loading}
+          className="w-[30%] inline-flex justify-center items-center rounded-md py-3 px-5 text-white bg-[#f99839] hover:bg-[#ee851c] focus:border-[#f99839] focus:outline-transparent focus:outline-offset-2 focus:shadow-[1px_1px_1px_#f99839] disabled:opacity-50 disabled:cursor-not-allowed my-2"
+          onClick={attachFact}
+        >
+          Attach Fact
+        </button>
+      </div>
       <button
         disabled={loading}
-        className="max-w-1/3 inline-flex justify-center items-center rounded-md py-3 px-5 text-white bg-[#f99839] hover:bg-[#ee851c] focus:border-[#f99839] focus:outline-transparent focus:outline-offset-2 focus:shadow-[1px_1px_1px_#f99839] disabled:opacity-50 disabled:cursor-not-allowed my-2"
+        className="w-full inline-flex justify-center items-center rounded-md py-3 px-5 text-white bg-[#f99839] hover:bg-[#ee851c] focus:border-[#f99839] focus:outline-transparent focus:outline-offset-2 focus:shadow-[1px_1px_1px_#f99839] disabled:opacity-50 disabled:cursor-not-allowed my-2"
         onClick={handleClick}
       >
         {loading ? <Spinner loading={loading} type="clip" /> : "Create Profile"}
