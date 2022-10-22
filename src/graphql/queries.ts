@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 
 export const GET_PROFILE = gql`
   query Profile($limit: Int, $offset: Int) {
-    profile(limit: $limit, offset: $offset) {
+    profile(limit: $limit, offset: $offset, order_by: { createdAt: desc }) {
       id
       title
       description

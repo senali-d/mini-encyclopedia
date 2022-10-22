@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { NextPage } from 'next'
 import { useUserData } from '@nhost/react'
@@ -20,19 +20,26 @@ const initialStateProfile = {
   title: '',
   description: '',
   image: '',
-  facts: [
-    {
-      fact: '',
-    }
-  ]
+  // facts: [
+  //   {
+  //     fact: '',
+  //   }
+  // ]
 }
 
-const AddProfileForm = () => {
+const AddProfileForm = ({onChange}: any) => {
   const user = useUserData()
   
   const [data, setData] = useState<ProfileProps>(initialStateProfile)
+  const [key, setKey] = useState<number>(0)
 
   const [createProfile, { data: profileData, loading, error }] = useMutation(CREATE_PROFILE)
+
+  useEffect(() =>{
+    if (onChange) {
+      onChange(key)
+    }
+  })
 
    const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>):void => {
     setData((data: ProfileProps) => {
@@ -52,6 +59,7 @@ const AddProfileForm = () => {
 
   const handleClick = () => {
     if (!user) return
+    setKey(Math.random())
     return createProfile({
       variables: {
         object: data
@@ -71,7 +79,7 @@ const AddProfileForm = () => {
       <Image
         width="600px"
         height="230px"
-        src={data.image === "" ? "/img/placeholder-image.png" : data.image}
+        src={data.image === "" ? "/img/placeholder-image.png" : getImage(data.image)}
         className="w-full md:w-[600px] h-auto rounded-3xl mb-5"
       />
       <Input
@@ -98,8 +106,8 @@ const AddProfileForm = () => {
   )
 }
 
-const ProfileTable = () => {
-  const { loading: isLoadingProfiles, error, data, fetchMore } = useQuery(GET_PROFILE, {
+const ProfileTable = ({refetchData}: any) => {
+  const { loading: isLoadingProfiles, error, data, refetch, fetchMore } = useQuery(GET_PROFILE, {
     variables: { 
       limit: 3,
       offset:0
@@ -113,6 +121,10 @@ const ProfileTable = () => {
     {"label": "Image"},
     {"label": ""},
   ]
+
+  useEffect(() => {
+    refetch()
+  }, [refetchData])
 
   const handleLoadMore = () => {
     fetchMore({
@@ -180,13 +192,18 @@ const ProfileTable = () => {
 }
 
 const Profile: NextPage = () => {
+  const [key, setKey] = useState<number>(0)
+  const eventhandler = (key: number) => {
+    setKey(key)
+  }
+
   return (
     <AdminLayout>
       <div className="flex justify-center flex-col w-full pt-4 max-w-[1200px] mx-auto">
         <Header title="Sea Horse" />
         <div className="flex space-x-2 pb-5">
-          <AddProfileForm />
-          <ProfileTable />
+          <AddProfileForm onChange={eventhandler} />
+          <ProfileTable refetchData={key} />
         </div>
       </div>
     </AdminLayout>
