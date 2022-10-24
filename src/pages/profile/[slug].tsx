@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 
-import { GET_PROFILE_WITH_FACTS } from '../../graphql/queries'
+import { GET_PROFILE_BY_PK } from '../../graphql/queries'
 import { CardVertical } from '../../components/common/card'
 import Header from '../../components/common/header'
 import Layout from '../../components/layout/layout'
@@ -11,7 +11,7 @@ const Profile = () => {
   const router = useRouter();
   const { slug } = router.query
 
-  const { loading: isLoadingProfile, error, data } = useQuery(GET_PROFILE_WITH_FACTS, {
+  const { loading: isLoadingProfile, error, data } = useQuery(GET_PROFILE_BY_PK, {
     variables: {
       id: slug
     }

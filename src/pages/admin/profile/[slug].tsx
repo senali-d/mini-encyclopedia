@@ -1,12 +1,14 @@
-import { ChangeEvent, useState } from "react";
-import Image from "next/image";
-import { NextPage } from "next";
-import { useUserData } from "@nhost/react";
-import { useMutation } from "@apollo/client";
+import { ChangeEvent, useEffect, useState } from 'react'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import { useUserData } from '@nhost/react'
+import { useMutation, useQuery } from '@apollo/client'
 
 import nhost from '../../../nhost'
 import withAuth from '../../../../withAuth'
-import { CREATE_PROFILE } from '../../../graphql/mutation'
+import { GET_PROFILE_BY_PK } from '../../../graphql/queries'
+import { CREATE_PROFILE, UPDATE_PROFILE } from '../../../graphql/mutation'
 import { FactsProp, ProfileProps } from '../../../types/types'
 import Header from '../../../components/common/header'
 import Input from '../../../components/common/input'
@@ -34,12 +36,38 @@ const initialStateFact = {
 
 const AddProfileForm = () => {
   const user = useUserData()
-
+  const router = useRouter()
+  const { slug } = router.query
+  
   const [data, setData] = useState<ProfileProps>(initialStateProfile)
   const [fact, setFact] = useState<FactsProp>(initialStateFact)
 
-  const [createProfile, { data: profileData, loading, error }] =
+  const { loading, error, data: dataProfile } = useQuery(GET_PROFILE_BY_PK, {
+    variables: {
+      id: slug
+    }
+  })
+  let profile = dataProfile?.profile_by_pk ?? ""
+
+  useEffect(() => {
+    const profileData = {
+      title: profile.title,
+      description: profile.description,
+      image: profile.image,
+      // facts: {
+      //   data: profile?.facts?.map((fact: FactsProp) =>{
+      //     return {fact: fact.fact}
+      //   })
+      // },
+    }
+    setData(profileData)
+  }, [dataProfile])
+
+  const [createProfile, { data: profileCreateData, loading: createLoading, error: createError }] =
     useMutation(CREATE_PROFILE)
+
+  const [updateProfile, { data: dataUpdate, loading: updateLoading, error: updateError }] =
+    useMutation(UPDATE_PROFILE)
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -61,12 +89,21 @@ const AddProfileForm = () => {
 
   const handleClick = () => {
     if (!user) return
-    setData(initialStateProfile)
-    return createProfile({
-      variables: {
-        object: data,
-      },
-    })
+    if(slug === "new"){ 
+      setData(initialStateProfile)
+      return createProfile({
+        variables: {
+          object: data,
+        },
+      })
+    }else {
+      return updateProfile({
+        variables: {
+          id: slug,
+          profile_set_input: data,
+        }
+      })
+    }
   }
 
   const handleFactChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -126,7 +163,7 @@ const AddProfileForm = () => {
       <div className="flex flex-col">
         <p className="text-white font-bold text-xl pt-5">Facts:</p>
         <ul className="mb-5">
-          {data.facts.data.map((f, index) =>
+          {data?.facts?.data?.map((f, index) =>
             f.fact !== "" ? (
               <li
                 key={index}
@@ -159,7 +196,7 @@ const AddProfileForm = () => {
         className="w-full inline-flex justify-center items-center rounded-md py-3 px-5 text-white bg-[#f99839] hover:bg-[#ee851c] focus:border-[#f99839] focus:outline-transparent focus:outline-offset-2 focus:shadow-[1px_1px_1px_#f99839] disabled:opacity-50 disabled:cursor-not-allowed my-2"
         onClick={handleClick}
       >
-        {loading ? <Spinner loading={loading} type="clip" /> : "Create Profile"}
+        {(createLoading || updateLoading) ? <Spinner loading={(createLoading || updateLoading)} type="clip" /> : slug === "new" ? "Create Profile" : "Update Profile"}
       </button>
     </div>
   )

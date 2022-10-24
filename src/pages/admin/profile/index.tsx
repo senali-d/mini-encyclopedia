@@ -10,6 +10,7 @@ import Header from '../../../components/common/header'
 import AdminLayout from '../../../components/layout/admin-layout'
 import Spinner from '../../../components/common/spinner'
 import { getImage } from '../../../util/image-util'
+import Link from 'next/link'
 
 const ProfileTable = () => {
   const [isLoadToMore, setIsLoadToMore] = useState(true)
@@ -45,9 +46,6 @@ const ProfileTable = () => {
     })
   }
 
-  const handleUpdate = () => {
-
-  }
   const handleDelete = () => {
 
   }  
@@ -86,12 +84,13 @@ const ProfileTable = () => {
                       <Image src={getImage(p.image)} width="50" height="50" />
                     </td>
                     <td className="w-[100px] space-x-1 py-4 px-5 text-center align-middle">
-                      <button
-                        onClick={handleUpdate}
-                        className="font-medium text-green-600"
-                      >
-                        <FiEdit size="20" />
-                      </button>
+                      <Link href={`/admin/profile/${p.id}`}>
+                        <a
+                          className="inline-flex font-medium text-green-600"
+                        >
+                          <FiEdit size="20" />
+                        </a>
+                      </Link>
                       <button
                         onClick={handleDelete}
                         className="font-medium text-red-600"
@@ -124,7 +123,16 @@ const Profile: NextPage = () => {
   return (
     <AdminLayout>
       <div className="flex flex-col w-full pt-4 max-w-[1200px] mx-auto">
-        <Header title="Sea Horse" />
+        <div className="flex justify-between">
+          <Header title="Sea Horse" />
+          <Link href="/admin/profile/new">
+            <a
+              className="inline-flex justify-center items-center rounded-md py-3 px-5 text-white bg-[#f99839] hover:bg-[#ee851c] focus:border-[#f99839] focus:outline-transparent focus:outline-offset-2 focus:shadow-[1px_1px_1px_#f99839] no-underline my-2"
+            >
+              Add New
+            </a>
+          </Link>
+        </div>
         <ProfileTable />
       </div>
     </AdminLayout>
