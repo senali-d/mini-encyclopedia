@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { NextPage } from 'next'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { FiEdit, FiDelete } from 'react-icons/fi'
 
 import withAuth from '../../../../withAuth'
 import { GET_PROFILE } from '../../../graphql/queries'
+import { DELETE_PROFILE } from '../../../graphql/mutation'
 import Header from '../../../components/common/header'
 import AdminLayout from '../../../components/layout/admin-layout'
 import Spinner from '../../../components/common/spinner'
@@ -14,7 +15,8 @@ import Link from 'next/link'
 
 const ProfileTable = () => {
   const [isLoadToMore, setIsLoadToMore] = useState(true)
-  const { loading, error, data, fetchMore } = useQuery(GET_PROFILE, {
+
+  const { loading, error, data, refetch, fetchMore } = useQuery(GET_PROFILE, {
     variables: { 
       limit: 10,
       offset: 0
@@ -22,6 +24,11 @@ const ProfileTable = () => {
   })
 
   let profile = data?.profile ?? []
+
+  const [deleteProfile, { data: deleteData, loading: deleteLoading, error: deleteError }] =
+  useMutation(DELETE_PROFILE)
+
+  deleteData ? refetch() : '' 
 
   const profileTable = [
     {"label": "Title"},
@@ -46,8 +53,12 @@ const ProfileTable = () => {
     })
   }
 
-  const handleDelete = () => {
-
+  const handleDelete = (id: string) => {
+    return deleteProfile({
+      variables: {
+        id,
+      }
+    })
   }  
 
   return (
@@ -92,7 +103,7 @@ const ProfileTable = () => {
                         </a>
                       </Link>
                       <button
-                        onClick={handleDelete}
+                        onClick={() => handleDelete(p.id)}
                         className="font-medium text-red-600"
                       >
                         <FiDelete size="20" />

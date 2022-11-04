@@ -69,6 +69,12 @@ const AddProfileForm = () => {
   const [updateProfile, { data: dataUpdate, loading: updateLoading, error: updateError }] =
     useMutation(UPDATE_PROFILE)
 
+  if((dataUpdate && !updateError) || (profileCreateData && !createError)) {
+    router.push({
+      pathname: '/admin/profile',
+    }, '/admin/profile')
+  }
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ): void => {
