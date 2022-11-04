@@ -32,3 +32,14 @@ export const UPDATE_PROFILE = gql`
     }
   }
 `
+
+export const DELETE_PROFILE = gql`
+  mutation deleteProfile($id: uuid!) {
+    delete_profile(where: { id: { _eq: $id } }) {
+      returning {
+        id
+        title
+      }
+    }
+  }
+`

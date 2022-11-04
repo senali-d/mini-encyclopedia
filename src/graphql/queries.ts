@@ -11,7 +11,7 @@ export const GET_PROFILE = gql`
   }
 `
 
-export const GET_PROFILE_WITH_FACTS = gql`
+export const GET_PROFILE_BY_PK = gql`
   query ProfileByPk($id: uuid!) {
     profile_by_pk(id: $id) {
       id
